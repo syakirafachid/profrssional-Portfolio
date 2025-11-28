@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syakirah Fachid Thalib - PM/Scrum Master</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 50%, #16213e 100%);
+            color: #e2e8f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.7);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        nav ul {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #60a5fa;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(96, 165, 250, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-30px) translateX(-20px); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            color: white;
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(96, 165, 250, 0.1);
+            color: #60a5fa;
+            border: 1px solid #60a5fa;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(96, 165, 250, 0.2);
+        }
+
+        .profile-img {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-img img {
+            width: 350px;
+            height: 350px;
+            border-radius: 20px;
+            object-fit: cover;
+            border: 2px solid #60a5fa;
+            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.2);
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(148, 163, 184, 0.05);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #60a5fa;
+            background: rgba(96, 165, 250, 0.08);
+            transform: translateY(-5px);
+        }
+
+        .stat-card h3 {
+            color: #60a5fa;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            background: rgba(148, 163, 184, 0.05);
+            border-left: 3px solid #60a5fa;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            background: rgba(96, 165, 250, 0.1);
+            border-left-color: #a78bfa;
+        }
+
+        .timeline-item h3 {
+            color: #60a5fa;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item .date {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .timeline-item li {
+            color: #cbd5e1;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-item li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #60a5fa;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: rgba(148, 163, 184, 0.05);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            border-color: #60a5fa;
+            background: rgba(96, 165, 250, 0.08);
+        }
+
+        .skill-category h4 {
+            color: #60a5fa;
+            margin-bottom: 1rem;
+        }
+
+        .skill-badge {
+            display: inline-block;
+            background: rgba(96, 165, 250, 0.1);
+            border: 1px solid #60a5fa;
+            color: #60a5fa;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            margin-right: 0.5rem;
+        }
+
+        /* Certifications */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            background: rgba(148, 163, 184, 0.05);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .cert-card:hover {
+            border-color: #a78bfa;
+            background: rgba(167, 139, 250, 0.08);
+            transform: translateY(-5px);
+        }
+
+        .cert-card h4 {
+            color: #a78bfa;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #60a5fa;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: #a78bfa;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .profile-img img {
+                width: 250px;
+                height: 250px;
+            }
+
+            .skills-grid, .cert-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Project Manager & Scrum Master</h1>
+                <p>Agile-focused professional with 3+ years in IT environments, cross-functional team coordination, and software development support. Transitioning into PM/Scrum Master roles with proven Agile expertise.</p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                    <a href="https://linkedin.com/in/syakirah-fachid123" class="btn btn-secondary" target="_blank">LinkedIn</a>
+                </div>
+            </div>
+            <div class="profile-img">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 350 350'%3E%3Crect fill='%23f0f0f0' width='350' height='350'/%3E%3C/svg%3E" alt="Syakirah Fachid Thalib">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-grid">
+            <div class="stat-card">
+                <h3>3+</h3>
+                <p>Years in IT & Agile environments</p>
+            </div>
+            <div class="stat-card">
+                <h3>80%</h3>
+                <p>Improvement in team efficiency through process optimization</p>
+            </div>
+            <div class="stat-card">
+                <h3>2</h3>
+                <p>Award-winning presenter & communicator</p>
+            </div>
+            <div class="stat-card">
+                <h3>3.81/4.0</h3>
+                <p>GPA in Information Systems</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2 class="section-title">Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>IT Technical Writer</h3>
+                <p>PT. MNC Digital Entertainment - RCTI+ | Jakarta</p>
+                <div class="date">Nov 2022 - Oct 2024</div>
+                <ul>
+                    <li>Actively contributed to Agile practices by organizing and tracking project schedules aligned with sprint goals</li>
+                    <li>Supported product teams with backlog prioritization and project tracking using Jira/Trello</li>
+                    <li>Bridged communication between technical and non-technical stakeholders to ensure alignment with business goals</li>
+                    <li>Enhanced documentation process, achieving 80% improvement in user satisfaction through feedback integration</li>
+                </ul>
+            </div>
+            <div class="timeline-item">
+                <h3>General Admin Internship</h3>
+                <p>Supreme Court of Indonesia (Mahkamah Agung)</p>
+                <div class="date">Sep 2021 - Oct 2021</div>
+                <ul>
+                    <li>Coordinated internal communication and documentation for high-level government correspondence</li>
+                    <li>Supported project tracking and reporting to improve operational efficiency</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">Skills & Tools</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h4>Project Management</h4>
+                <span class="skill-badge">Scrum & Agile</span>
+                <span class="skill-badge">Sprint Planning</span>
+                <span class="skill-badge">Backlog Management</span>
+                <span class="skill-badge">Stakeholder Communication</span>
+            </div>
+            <div class="skill-category">
+                <h4>Tools & Platforms</h4>
+                <span class="skill-badge">Jira</span>
+                <span class="skill-badge">Trello</span>
+                <span class="skill-badge">Kanban</span>
+                <span class="skill-badge">Confluence</span>
+            </div>
+            <div class="skill-category">
+                <h4>Core Competencies</h4>
+                <span class="skill-badge">Team Facilitation</span>
+                <span class="skill-badge">Data Analysis</span>
+                <span class="skill-badge">Process Optimization</span>
+                <span class="skill-badge">Documentation</span>
+            </div>
+            <div class="skill-category">
+                <h4>Languages</h4>
+                <span class="skill-badge">Bahasa Indonesia (Native)</span>
+                <span class="skill-badge">English (Fluent)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section>
+        <h2 class="section-title">Certifications</h2>
+        <div class="cert-grid">
+            <div class="cert-card">
+                <h4>Agile Project Management</h4>
+                <p>Google Certificates | 2024</p>
+            </div>
+            <div class="cert-card">
+                <h4>Foundations of Project Management</h4>
+                <p>Google Certificates | 2024</p>
+            </div>
+            <div class="cert-card">
+                <h4>Project Initiation</h4>
+                <p>Google Certificates | 2024</p>
+            </div>
+            <div class="cert-card">
+                <h4>Project Planning</h4>
+                <p>Google Certificates | 2024</p>
+            </div>
+            <div class="cert-card">
+                <h4>Project Execution</h4>
+                <p>Google Certificates | 2024</p>
+            </div>
+            <div class="cert-card">
+                <h4>Junior Web Development</h4>
+                <p>BNSP | Jan 2022 - Jan 2025</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="contact-content">
+            <h2 class="section-title">Let's Connect</h2>
+            <p>Ready to bring Agile excellence to your team. Let's chat!</p>
+            <div class="contact-links">
+                <a href="mailto:syakirafachid@gmail.com" class="contact-link">
+                    📧 syakirafachid@gmail.com
+                </a>
+                <a href="tel:081776793321" class="contact-link">
+                    📱 +62 817 767 93321
+                </a>
+                <a href="https://linkedin.com/in/syakirah-fachid123" class="contact-link" target="_blank">
+                    💼 LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Syakirah Fachid Thalib. Crafted with passion for Agile excellence. Jakarta, Indonesia.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll animation for elements
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.timeline-item, .stat-card, .cert-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
